@@ -48,15 +48,6 @@ public class BankClientService {
 	    return bankClientRepository.save(bankClient);
 	}
 	
-	@GetMapping("/clients/{id}")
-	public ResponseEntity<BankClient> getClientById(@PathVariable(value = "id") Long bankClientId) {
-		BankClient bankClient = bankClientRepository.findOne(bankClientId);
-	    if(bankClient == null) {
-	        return ResponseEntity.notFound().build();
-	    }
-	    return ResponseEntity.ok().body(bankClient);
-	}
-	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
 	public Result login(@RequestParam(value="email") String email, @RequestParam(value="password") String password
 	      ){
