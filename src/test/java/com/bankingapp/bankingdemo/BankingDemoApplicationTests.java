@@ -44,7 +44,7 @@ public class BankingDemoApplicationTests {
 	@Test
 	public void testAddClient() throws Exception {
 
-		BankClient client = new BankClient("Robin", "Van Persie", "robin.vanpersie@gmail.com", "1234");
+		BankClient client = new BankClient("Robin", "Hood", "robin.hood@gmail.com", "1234");
 
 		ResponseEntity<BankClient> responseEntity = (ResponseEntity<BankClient>) restTemplate.postForEntity(URL + "add",
 				client, BankClient.class);
@@ -66,7 +66,7 @@ public class BankingDemoApplicationTests {
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		map.add("email", "dirk@yahoo.com");
+		map.add("email", "peter.pan@yahoo.com");
 		map.add("password", "11111");
 
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
@@ -91,7 +91,7 @@ public class BankingDemoApplicationTests {
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		map.add("email", "dirk@yahoo.com");
+		map.add("email", "peter.pan@yahoo.com");
 		map.add("password", "1111");
 
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
@@ -190,21 +190,13 @@ public class BankingDemoApplicationTests {
 	@Test
 	public void testGetBalanceAndStatement() throws Exception {
 
-		// prepare
-		// Not required as init-data.sql will insert one record which will
-		// be retrieved here
-
-		// execute
 		ResponseEntity<BalanceStatementResult> responseEntity = restTemplate
 				.getForEntity(URL + "balanceStatement/{bankClientId}", BalanceStatementResult.class, new Long(1));
 
-		// collect response
 		int status = responseEntity.getStatusCodeValue();
 		BalanceStatementResult result = responseEntity.getBody();
 
-		// verify
 		assertEquals("Incorrect Response Status", HttpStatus.OK.value(), status);
-
 		assertNotNull(result);
 		assertEquals(result.getBalance().intValue(), 1500);
 		assertEquals(result.getActions().size(), 2);
