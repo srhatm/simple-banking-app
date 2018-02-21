@@ -1,5 +1,5 @@
 # simple-banking-app
-A simple banking app developed with spring boot
+A simple banking app backend developed with spring boot
 
 This project is a simple backend implementation of a banking application. The project is developed with spring boot. 
 It consists of restful services, hibernate and in memory database(hsqldb). Also integration tests are implemented. 
