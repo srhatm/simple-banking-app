@@ -4,6 +4,9 @@ jdk: oraclejdk8
 
 install: true
 
+before_install:
+  - chmod +x mvnw
+
 cache:
 
   directories:
